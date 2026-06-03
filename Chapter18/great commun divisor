@@ -1,0 +1,17 @@
+import java.util.Scanner; 
+public class gcd {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter two integers to find their GCD:");
+        int m = scanner.nextInt();
+        int n = scanner.nextInt();
+        System.out.println("The GCD of " + m + " and " + n + " is: " + gcd(m, n));
+        scanner.close();
+    }
+    public static int gcd( int m, int n){
+        if (m%n == 0)
+        return n;
+        else
+            return gcd(n, m%n);
+    }
+}
