@@ -1,0 +1,32 @@
+import java.util.Scanner;
+public class Exercise {
+public static void main(String[] args) {
+Scanner input = new Scanner(System.in);
+System.out.print("Enter a string:");
+String string = input.nextLine();
+if (string.length() == 0) {
+System.out.println("Enter String");
+return;
+}
+String Longest="";
+String current="";
+current += string.charAt(0);
+for(int i=1; i<string.length(); i++){
+if(string.charAt(i)>=string.charAt(i-1)){
+current += string.charAt(i);
+}
+else{
+if(current.length()>Longest.length()){
+Longest = current;
+}
+current ="" + string.charAt(i);
+}
+}
+if(current.length()>Longest.length()){
+Longest = current;
+}
+System.out.println("The longest substring in alphabetical order is:" +
+Longest);
+input.close();
+}
+}
