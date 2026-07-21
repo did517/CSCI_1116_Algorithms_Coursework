@@ -1,0 +1,42 @@
+hor: Dimercia Numbi
+Date: 07/15/2026
+Description:
+This program raises a flag using a separate thread instead of a PathTransition
+The thread updates the ImageView position until the flag reaches the top
+Time Complexity: O(n), where n is the number of position updates
+*/
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+public class FlagRisingAnimation extends Application {
+public void start(Stage primaryStage) {
+Pane pane = new Pane();
+ImageView imageView = new ImageView("image/us.gif");
+imageView.setX(100);
+imageView.setY(200);
+pane.getChildren().add(imageView);
+Thread thread = new Thread(() -> {
+try {
+for (int i = 200; i >= 0; i--) {
+final int y = i;
+Platform.runLater(() -> imageView.setY(y));
+Thread.sleep(50);
+}
+} catch (InterruptedException ex) {
+ex.printStackTrace();
+}
+});
+thread.setDaemon(true);
+thread.start();
+Scene scene = new Scene(pane, 250, 220);
+primaryStage.setTitle("FlagRisingAnimation");
+primaryStage.setScene(scene);
+primaryStage.show();
+}
+public static void main(String[] args) {
+launch(args);
+}
+}
